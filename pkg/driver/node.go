@@ -57,7 +57,7 @@ func NewNodeService(connector cloud.Cloud, mounter mount.Mounter, options *Optio
 
 func (ns *NodeService) NodeStageVolume(ctx context.Context, req *csi.NodeStageVolumeRequest) (*csi.NodeStageVolumeResponse, error) {
 	logger := klog.FromContext(ctx)
-	logger.V(4).Info("NodeStageVolume: called", "args", *req)
+	logger.V(4).Info("NodeStageVolume: called", "args", req)
 
 	// Check parameters
 
@@ -184,7 +184,7 @@ func (ns *NodeService) NodeStageVolume(ctx context.Context, req *csi.NodeStageVo
 
 func (ns *NodeService) NodeUnstageVolume(ctx context.Context, req *csi.NodeUnstageVolumeRequest) (*csi.NodeUnstageVolumeResponse, error) {
 	logger := klog.FromContext(ctx)
-	logger.V(4).Info("NodeUnstageVolume: called", "args", *req)
+	logger.V(4).Info("NodeUnstageVolume: called", "args", req)
 
 	// Check parameters
 	volumeID := req.GetVolumeId()
@@ -245,7 +245,7 @@ func (ns *NodeService) NodeUnstageVolume(ctx context.Context, req *csi.NodeUnsta
 
 func (ns *NodeService) NodePublishVolume(ctx context.Context, req *csi.NodePublishVolumeRequest) (*csi.NodePublishVolumeResponse, error) {
 	logger := klog.FromContext(ctx)
-	logger.V(4).Info("NodePublishVolume: called", "args", *req)
+	logger.V(4).Info("NodePublishVolume: called", "args", req)
 
 	// Check arguments
 	volumeID := req.GetVolumeId()
@@ -301,7 +301,7 @@ func (ns *NodeService) NodePublishVolume(ctx context.Context, req *csi.NodePubli
 
 func (ns *NodeService) NodeUnpublishVolume(ctx context.Context, req *csi.NodeUnpublishVolumeRequest) (*csi.NodeUnpublishVolumeResponse, error) {
 	logger := klog.FromContext(ctx)
-	logger.V(4).Info("NodeUnpublishVolume: called", "args", *req)
+	logger.V(4).Info("NodeUnpublishVolume: called", "args", req)
 
 	volumeID := req.GetVolumeId()
 	if volumeID == "" {
@@ -335,7 +335,7 @@ func (ns *NodeService) NodeUnpublishVolume(ctx context.Context, req *csi.NodeUnp
 
 func (ns *NodeService) NodeGetInfo(ctx context.Context, req *csi.NodeGetInfoRequest) (*csi.NodeGetInfoResponse, error) {
 	logger := klog.FromContext(ctx)
-	logger.V(4).Info("NodeGetInfo: called", "args", *req)
+	logger.V(4).Info("NodeGetInfo: called", "args", req)
 
 	if ns.nodeName == "" {
 		return nil, status.Error(codes.Internal, "Missing node name")
@@ -363,7 +363,7 @@ func (ns *NodeService) NodeGetInfo(ctx context.Context, req *csi.NodeGetInfoRequ
 
 func (ns *NodeService) NodeExpandVolume(ctx context.Context, req *csi.NodeExpandVolumeRequest) (*csi.NodeExpandVolumeResponse, error) {
 	logger := klog.FromContext(ctx)
-	logger.V(4).Info("NodeExpandVolume: called", "args", *req)
+	logger.V(4).Info("NodeExpandVolume: called", "args", req)
 
 	volumeID := req.GetVolumeId()
 	if len(volumeID) == 0 {
@@ -454,7 +454,7 @@ func (ns *NodeService) NodeExpandVolume(ctx context.Context, req *csi.NodeExpand
 
 func (ns *NodeService) NodeGetVolumeStats(ctx context.Context, req *csi.NodeGetVolumeStatsRequest) (*csi.NodeGetVolumeStatsResponse, error) {
 	logger := klog.FromContext(ctx)
-	logger.V(4).Info("NodeGetVolumeStats: called", "args", *req)
+	logger.V(4).Info("NodeGetVolumeStats: called", "args", req)
 
 	if req.GetVolumeId() == "" {
 		return nil, status.Error(codes.InvalidArgument, "Volume ID missing in request")
